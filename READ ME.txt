@@ -1,1 +1,46 @@
-Testing 
+Github
+All homework is submitted via Github.
+
+Install the git tools from http://cstructor.com/Home/Notes?classId=40&sequence=20 (Links to an external site.)
+
+Go to https://github.com/ (Links to an external site.) and create an account if you do not have one.
+
+Create a new repository (There should be a "New repository" button)
+
+Give it a name.
+
+Add a .gitignore of VisualStudio.
+
+Click Create repository.
+
+It should take you to your new repository.
+
+Click on the Clone or download green button and copy the url (ie. https://github.com/user/repo.git (Links to an external site.))
+
+Open a Command prompt (Start | Run | cmd.exe)
+
+Change directory to C:\Source for example.
+
+Enter: git clone http://github.com/yourUser/yourRepo.git (Links to an external site.)
+
+It will create a directory C:\Source\yourRepo
+
+Put all your homework under this directory.
+
+When you are done with your homework...
+
+Open a Command prompt.
+
+Change directory to C:\Source\yourRepo
+
+> cd c:\source\yourRepo
+
+> git add -A
+
+> git commit -m "Added homework1"
+
+> git push
+
+This will copy all your work up to github.com.
+
+You can go to github.com to see your work.
