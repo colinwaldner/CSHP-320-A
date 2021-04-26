@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+/******************************************
+ * 
+ * CSHP 320 A
+ * Assignment 1
+ * Colin Waldner
+ * April 26, 2021
+ * 
+ ****************************************/
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HelloWorld
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -26,7 +21,28 @@ namespace HelloWorld
         }
         private void uxSubmit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Submitting Password: {uxPassword.Text}");
+            MessageBox.Show($"User Name: {uxName.Text}\n Password: {uxPassword.Text}");
+        }
+        private void uxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (CheckText()) { uxSubmit.IsEnabled = true; }
+            else { uxSubmit.IsEnabled = false; }
+        }
+        private void uxPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (CheckText()) { uxSubmit.IsEnabled = true; }
+            else { uxSubmit.IsEnabled = false; }
+        }
+        private bool CheckText()
+        {
+            bool result = false;
+
+            if (!string.IsNullOrEmpty(uxName.Text) && !string.IsNullOrEmpty(uxPassword.Text))
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

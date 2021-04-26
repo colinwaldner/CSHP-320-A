@@ -8,13 +8,13 @@
         Title="MainWindow" Width="250" Height="200">
     <StackPanel MaxWidth="250" MaxHeight="200" Margin="5 0 5 0">
         <TextBlock>Enter Name:</TextBlock>
-        <TextBox x:Name="uxName"></TextBox>
+        <TextBox x:Name="uxName" TextChanged="uxName_TextChanged"></TextBox>
         <TextBlock>Enter Password:</TextBlock>
-        <TextBox x:Name="uxPassword" ></TextBox>
-        <Button x:Name="uxSubmit" Click="uxSubmit_Click" Width="100" Height="45" Margin="0 5 0 0">
+        <TextBox x:Name="uxPassword" TextChanged="uxPassword_TextChanged" ></TextBox>
+        <Button x:Name="uxSubmit" Click="uxSubmit_Click" Width="100" Height="45" Margin="0 5 0 0" IsEnabled="False">
             <StackPanel Orientation="Vertical">
                 <Image Source="/images/ic_thumb_up_black_24dp_2x.png" Width="25" Height="25" />
-                <TextBlock Text="Thumbs Up" />
+                <TextBlock Text="Submit" />
             </StackPanel>
         </Button>
     </StackPanel>
