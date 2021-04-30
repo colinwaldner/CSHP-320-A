@@ -8,42 +8,42 @@ namespace Session3Generics
     {
         static void Main(string[] args)
         {
-            var autos = new List<Auto>();
+            //var autos = new List<Auto>();
 
-            autos.Add(new Auto { Name = "SUV", MaxSpeed = 101, Price = 2000 });
-            autos.Add(new Auto { Name = "Sedan", MaxSpeed = 120, Price = 1000 });
-            autos.Add(new Auto { Name = "Coupe", MaxSpeed = 110, Price = 3000 });
+            //autos.Add(new Auto { Name = "SUV", MaxSpeed = 101, Price = 2000 });
+            //autos.Add(new Auto { Name = "Sedan", MaxSpeed = 120, Price = 1000 });
+            //autos.Add(new Auto { Name = "Coupe", MaxSpeed = 110, Price = 3000 });
 
-            // TBD: Find the lowest price auto
-            var auto = autos.OrderBy(a => a.Price).First();
+            //// TBD: Find the lowest price auto
+            //var auto = autos.OrderBy(a => a.Price).First();
 
-            Console.WriteLine("Lowest Price: Name={0} Price={1}", auto.Name, auto.Price);
+            //Console.WriteLine("Lowest Price: Name={0} Price={1}", auto.Name, auto.Price);
 
-            // TBD: Find the fastest auto
-            auto = autos.OrderBy(a => a.MaxSpeed).Last();
+            //// TBD: Find the fastest auto
+            //auto = autos.OrderBy(a => a.MaxSpeed).Last();
 
-            Console.WriteLine("Fastest Speed: Name={0} Speed={1}", auto.Name, auto.MaxSpeed);
-
-            Console.ReadLine();
-
-
-            //MyStack<int> stack = new MyStack<int>();
-
-            //stack.Push(1);
-            //stack.Push(2);
-
-            //while (!stack.IsEmpty)
-            //{
-            //    int number = stack.Pop();
-            //    Console.WriteLine("Last value popped = {0}", number);
-            //}
+            //Console.WriteLine("Fastest Speed: Name={0} Speed={1}", auto.Name, auto.MaxSpeed);
 
             //Console.ReadLine();
+
+
+            MyStack<int> stack = new MyStack<int>();
+
+            stack.Push(1);
+            stack.Push(2);
+
+            while (!stack.IsEmpty)
+            {
+                int number = stack.Pop();
+                Console.WriteLine("Last value popped = {0}", number);
+            }
+
+            Console.ReadLine();
         }
     }
     public class MyStack<T>
     {
-        T[] stack;
+        T[] stack = new T[10];
         int sp;
 
         public void Push(T item)
