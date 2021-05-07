@@ -26,7 +26,7 @@ namespace InClassPropertyChange
             // Set this to false if the New command is not available
             e.CanExecute = true;
             uxMenuItem_New.IsEnabled = e.CanExecute;
-        }S
+        }
         private void OnNew_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("New command");
