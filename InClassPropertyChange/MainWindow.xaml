@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InClassPropertyChange"
         mc:Ignorable="d"
-        Title="MainWindow" Height="215" Width="279">
-    <StackPanel Name="uxContainer" HorizontalAlignment="Left" Width="200px">
+        Title="MainWindow" Height="500" Width="350">
+    <StackPanel Name="uxContainer" HorizontalAlignment="Left">
+        
+        <ListView x:Name="uxList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserName}" Header="User Name" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserPassword}" Header="Password" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
         <TextBlock>Enter Name:</TextBlock>
 
         <TextBox x:Name="uxName" 
@@ -23,6 +34,15 @@
         <Label x:Name="uxPasswordError" 
             Content="{Binding PasswordError, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF530404">
         </Label>
+
+        <TextBlock>Enter Age:</TextBlock>
+        <TextBox x:Name="uxAge" 
+        Text="{Binding Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+        </TextBox>
+        <Label x:Name="uxAgeError" 
+            Content="{Binding AgeError, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF530404">
+        </Label>
+        
         <Button x:Name="uxButtonSubmit" Content="Submit" Click="uxButtonSubmit_Click" ></Button>
 
     </StackPanel>
