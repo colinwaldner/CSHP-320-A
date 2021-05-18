@@ -10,10 +10,25 @@
         <ListView x:Name="uxList">
             <ListView.View>
                 <GridView x:Name="uxGridView" AllowsColumnReorder="True">
-                    <GridViewColumn Header="Name" x:Name="uxHeaderName" DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                        <GridViewColumnHeader x:Name="Name">
+                            <GridViewColumnHeader.Content>
+                                <TextBlock Text="Name">
+                                    <Image x:Name="uxNameHeader_icon" Source="/Images/caret-up-solid.png" Width="16" Height="16" />
+                                </TextBlock>
+                            </GridViewColumnHeader.Content>
+                        </GridViewColumnHeader>
                     </GridViewColumn>
-                    <GridViewColumn Header="Password" x:Name="uxHeaderPassword" DisplayMemberBinding="{Binding Password}" />
-                </GridView>                
+                    <GridViewColumn DisplayMemberBinding="{Binding Password}">
+                        <GridViewColumnHeader x:Name="Password">
+                            <GridViewColumnHeader.Content>
+                                <TextBlock Text="Password">
+                                    <Image x:Name="uxPasswordHeader_icon" Source="/Images/caret-up-solid.png" Width="16" Height="16" />
+                                </TextBlock>
+                            </GridViewColumnHeader.Content>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                </GridView>
             </ListView.View>
         </ListView>
     </Grid>
