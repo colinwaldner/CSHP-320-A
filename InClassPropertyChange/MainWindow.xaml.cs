@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
 
 namespace InClassPropertyChange
 {
@@ -27,6 +28,11 @@ namespace InClassPropertyChange
             //uxName.DataContext = user;
             //uxNameError.DataContext = user;
             uxContainer.DataContext = user;
+
+            var sample = new SampleContext();
+            sample.Users.Load();
+            var users = sample.Users.Local.ToObservableCollection();
+            uxList.ItemsSource = users;
         }
 
         private void uxButtonSubmit_Click(object sender, RoutedEventArgs e)
