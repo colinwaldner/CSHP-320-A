@@ -1,0 +1,16 @@
+﻿<Window x:Class="HomeWork4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="250" Width="200">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        <Label Content="US/CAD Postal Code"></Label>
+        <TextBox x:Name="uxPostalCode" 
+                 TextChanged="uxPostalCode_TextChanged"></TextBox>
+        <Button x:Name="uxSubmit"
+                Content="Submit" Width="50px"></Button>
+    </StackPanel>
+</Window>
