@@ -24,7 +24,7 @@ namespace InClassPropertyChange
         private void OnNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             // Set this to false if the New command is not available
-            e.CanExecute = true;
+            e.CanExecute = false;            
             uxMenuItem_New.IsEnabled = e.CanExecute;
         }
         private void OnNew_Click(object sender, RoutedEventArgs e)
