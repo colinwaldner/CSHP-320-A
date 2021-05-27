@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\edit-regular.png" />
+    <None Remove="Images\file-regular.png" />
+    <None Remove="Images\sign-out-alt-solid.png" />
+    <None Remove="Images\star-solid.png" />
+    <None Remove="Images\trash-alt-regular.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,6 +23,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CryptoWalletRepository\CryptoWalletRepository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\edit-regular.png" />
+    <Resource Include="Images\file-regular.png" />
+    <Resource Include="Images\sign-out-alt-solid.png" />
+    <Resource Include="Images\star-solid.png" />
+    <Resource Include="Images\trash-alt-regular.png" />
   </ItemGroup>
 
 </Project>

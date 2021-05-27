@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CryptoWalletApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="DictionaryStyleSheet.xaml"></ResourceDictionary>
     </Application.Resources>
 </Application>

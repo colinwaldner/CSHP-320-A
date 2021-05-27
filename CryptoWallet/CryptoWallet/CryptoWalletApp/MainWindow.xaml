@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoWalletApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="{StaticResource ApplicationName}" Height="300" Width="800">
+    <Window.CommandBindings>
+        <!--<CommandBinding Command="New" CanExecute="uxNew_CanExecute" Executed="uxNew_Click" />-->
+        <CommandBinding Command="New"/>
+    </Window.CommandBindings>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="_Edit">
+                <MenuItem.Icon>
+                    <Image Source="/Images/edit-regular.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Delete">
+                <MenuItem.Icon>
+                    <Image Source="/Images/trash-alt-regular.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem x:Name="uxFavourite" Header="_Favourite" Click="uxFavourite_Click">
+                <MenuItem.Icon>
+                    <Image Source="/Images/star-solid.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="uxNew" Header="_File" Click="uxNew_Click">
+                <MenuItem Header="_New">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/file-regular.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="uxExit" Header="_Exit" Click="uxExit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/sign-out-alt-solid.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="uxInfo" Header="_Info">                
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="Items"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock x:Name="uxCount"></TextBlock>
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <TextBlock x:Name="uxMaxCount"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <ListView x:Name="uxList" ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView>
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Path=Favourite}"         Header="Fav"            Width="25"></GridViewColumn>-->
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"              Header="Name"           Width="100"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Ticker}"            Header="Ticker"         Width="50"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PurchasePrice}"     Header="Purchase Price" Width="75"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}"          Header="Quantity"       Width="75"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=PurchaseDate}"      Header="Purchase Date"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CurrentPrice}"      Header="Current Price"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CurrentPriceDate}"  Header="Current PriceDate"></GridViewColumn>                    
+                </GridView>                
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDown"></EventSetter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </DockPanel>
 </Window>
