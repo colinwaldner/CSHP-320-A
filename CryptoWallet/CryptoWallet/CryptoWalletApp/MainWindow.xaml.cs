@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CryptoWalletApp.Model;
 
 namespace CryptoWalletApp
 {
@@ -20,51 +22,191 @@ namespace CryptoWalletApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Coin> Wallet = new List<Coin>();
+        private GridViewColumnHeader listViewSortCol = null;
+        private SortAdorner listViewSortAdorner = null;
+        private CoinModel selectedCoin;
 
         public MainWindow()
         {
             InitializeComponent();
-            FillWallet();
-            uxList.ItemsSource = Wallet;
-            uxMaxCount.Text = "100";
-            uxCount.Text = Wallet.Count.ToString();
+
+            LoadCoins();            
         }
-        public void FillWallet()
+        #region Sorting Class
+        public class SortAdorner : Adorner
         {
-            Wallet.Add(new Coin { Id = 1, Favourite = false, Name = "Bitcoin", Ticker = "BTC", PurchasePrice = 37609, Quantity = 1, PurchaseDate = DateTime.Now, CurrentPrice = 37609, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 2, Favourite = false, Name = "Ethereum", Ticker = "ETH", PurchasePrice = 2500, Quantity = 5, PurchaseDate = DateTime.Now, CurrentPrice = 2500, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 3, Favourite = false, Name = "Cardano", Ticker = "ADA", PurchasePrice = 1.5, Quantity = 25, PurchaseDate = DateTime.Now, CurrentPrice = 1.5, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 4, Favourite = false, Name = "Total Crypto Market Cap", Ticker = "TCAP", PurchasePrice = 260, Quantity = 3, PurchaseDate = DateTime.Now, CurrentPrice = 260, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 5, Favourite = false, Name = "Polyon", Ticker = "MATIC", PurchasePrice = 1.4, Quantity = 25, PurchaseDate = DateTime.Now, CurrentPrice = 1.4, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 6, Favourite = false, Name = "Safe Moon", Ticker = "SAFEMOON", PurchasePrice = 0.000006352, Quantity = 5000000, PurchaseDate = DateTime.Now, CurrentPrice = 0.000006352, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 7, Favourite = false, Name = "Doge Coin", Ticker = "DOGE", PurchasePrice = 0.3443, Quantity = 2000, PurchaseDate = DateTime.Now, CurrentPrice = 0.3443, CurrentPriceDate = DateTime.Now });
-            Wallet.Add(new Coin { Id = 8, Favourite = false, Name = "Polkadot", Ticker = "DOT", PurchasePrice = 22.213, Quantity = 10, PurchaseDate = DateTime.Now, CurrentPrice = 22.213, CurrentPriceDate = DateTime.Now });
+            private static Geometry ascGeometry =
+                Geometry.Parse("M 0 4 L 3.5 0 L 7 4 Z");
+
+            private static Geometry descGeometry =
+                Geometry.Parse("M 0 0 L 3.5 4 L 7 0 Z");
+
+            public ListSortDirection Direction { get; private set; }
+
+            public SortAdorner(UIElement element, ListSortDirection dir)
+                : base(element)
+            {
+                this.Direction = dir;
+            }
+
+            protected override void OnRender(DrawingContext drawingContext)
+            {
+                base.OnRender(drawingContext);
+
+                if (AdornedElement.RenderSize.Width < 20)
+                    return;
+
+                TranslateTransform transform = new TranslateTransform
+                    (
+                        AdornedElement.RenderSize.Width - 15,
+                        (AdornedElement.RenderSize.Height - 5) / 2
+                    );
+                drawingContext.PushTransform(transform);
+
+                Geometry geometry = ascGeometry;
+                if (this.Direction == ListSortDirection.Descending)
+                    geometry = descGeometry;
+                drawingContext.DrawGeometry(Brushes.Black, null, geometry);
+
+                drawingContext.Pop();
+            }
+        }
+        #endregion
+        private void LoadCoins()
+        {
+            var coins = App.CoinRepository.GetAll();
+            uxList.ItemsSource = coins
+                .Select(s => CoinModel.ToModel(s))
+                .OrderBy(o => o.Name)
+                .ToList();            
+
+            //Status Bar Totals
+            var sumPurchasePrice = coins.Sum(coin => coin.PurchasePrice);
+            var sumCurrentPrice = coins.Sum(coin => coin.CurrentPrice);
+
+            uxTotalCount.Text = coins.Count.ToString();
+            uxPurchaseValue.Text = String.Format("{0:C}", sumPurchasePrice);
+            uxCurrentValue.Text = String.Format("{0:C}", sumCurrentPrice);
+            uxTotalValue.Text = String.Format("{0:C}", (sumCurrentPrice - sumPurchasePrice));           
+
+            if ((sumCurrentPrice - sumPurchasePrice) <= 0)
+            {
+                uxTotalValue.Foreground = Brushes.Red;
+            }
+            else
+            {
+                uxTotalValue.Foreground = Brushes.Green;
+            }   
+                        
         }
 
-        private void ListViewItem_MouseDown(object sender, MouseButtonEventArgs e)
+        private void uxList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedCoin = (CoinModel)uxList.SelectedItem;
+            uxContextEdit.IsEnabled = (selectedCoin != null);
+            uxContextDelete.IsEnabled = (selectedCoin != null);
+            uxContextFavourite.IsEnabled = (selectedCoin != null);
+        }
+
+        
+
+        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            string sortBy = column.Tag.ToString();
+
+            if (listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
+                uxList.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortCol == column && listViewSortAdorner.Direction == newDir)
+            {
+                newDir = ListSortDirection.Descending;
+            }
+
+            listViewSortCol = column;
+            listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
+            uxList.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+        }
+
+        #region New_Click
+        private void uxFileNew_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new CoinWindow();
+            window.Owner = Application.Current.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            if (window.ShowDialog() == true)
+            {
+                var uiCoinModel = window.Coin;
+
+                var repositoryCoinModel = uiCoinModel.ToRepositoryModel();
+
+                App.CoinRepository.Add(repositoryCoinModel);
+
+                LoadCoins();
+            }
+        }
+
+        #endregion
+
+        #region Edit_Click
+        private void uxContextEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new CoinWindow();
+            window.Coin = selectedCoin.Clone();
+
+            if (window.ShowDialog() == true)
+            {
+                App.CoinRepository.Update(window.Coin.ToRepositoryModel());
+                LoadCoins();
+            }
+        }
+
+        private void uxList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (selectedCoin != null)
+            {
+                var window = new CoinWindow();
+                window.Coin = selectedCoin.Clone();
+
+                if (window.ShowDialog() == true)
+                {
+                    App.CoinRepository.Update(window.Coin.ToRepositoryModel());
+                    LoadCoins();
+                }
+            }            
+        }
+
+        #endregion
+
+        #region Delete_Click
+        private void uxContextDelete_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void uxFavourite_Click(object sender, RoutedEventArgs e)
-        {
-            uxInfo.IsEnabled = false;
-        }
+        #endregion
 
-        private void uxExit_Click(object sender, RoutedEventArgs e)
+        #region Other_Click
+        private void uxFileExit_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
-        private void uxNew_Click(object sender, RoutedEventArgs e)
+        private void uxContextFavourite_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NewItemWindow();
-
-            window.ShowInTaskbar = false;
-            window.Owner = Application.Current.MainWindow;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.Show();
+            uxInfo.IsEnabled = false;
         }
+
+
+
+        #endregion
+
+        
     }
 }

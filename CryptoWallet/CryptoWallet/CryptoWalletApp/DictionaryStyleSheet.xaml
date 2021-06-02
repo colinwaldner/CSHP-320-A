@@ -3,7 +3,27 @@
                     xmlns:clr="clr-namespace:System;assembly=System.Runtime"
                     xmlns:local="clr-namespace:CryptoWalletApp">
     <clr:String x:Key="ApplicationName">Crypto Wallet</clr:String>
+    
     <Style x:Key="FavIcon" TargetType="{x:Type MenuItem}">
         <Setter Property="Foreground" Value="Yellow"></Setter>
+    </Style>
+    
+    <Style x:Key="GridViewColumnHeader" TargetType="GridViewColumnHeader">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                    <TextBlock Padding="5,5,5,0"
+                               TextAlignment="Left" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="OverridesDefaultStyle"
+                Value="True" />
+        <Setter Property="Foreground"
+                Value="Black" />
+        <Setter Property="FontFamily"
+                Value="Segoe UI" />
+        <Setter Property="FontSize"
+                Value="12" />-->
     </Style>
 </ResourceDictionary>

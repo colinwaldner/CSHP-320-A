@@ -13,5 +13,18 @@ namespace CryptoWalletApp
     /// </summary>
     public partial class App : Application
     {
+        private static CryptoWalletRepository.CoinRepository _coinRepository;
+
+        static App()
+        {
+            _coinRepository = new CryptoWalletRepository.CoinRepository();
+        }
+        public static CryptoWalletRepository.CoinRepository CoinRepository
+        {
+            get
+            {
+                return _coinRepository;
+            }
+        }
     }
 }

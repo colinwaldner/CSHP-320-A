@@ -112,6 +112,7 @@ namespace ContactApp
             uxContextDelete.IsEnabled = (selectedContact != null);
             uxContextModify.IsEnabled = (selectedContact != null);
         }
+
         #region NEW Click
         private void uxFileNew_Click(object sender, RoutedEventArgs e)
         {
