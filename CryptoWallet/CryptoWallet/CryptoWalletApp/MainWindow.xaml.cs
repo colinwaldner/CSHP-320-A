@@ -32,6 +32,7 @@ namespace CryptoWalletApp
 
             LoadCoins();            
         }
+
         #region Sorting Class
         public class SortAdorner : Adorner
         {
@@ -99,17 +100,17 @@ namespace CryptoWalletApp
             }   
                         
         }
-
         private void uxList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedCoin = (CoinModel)uxList.SelectedItem;
+
             uxContextEdit.IsEnabled = (selectedCoin != null);
+            uxFileEdit.IsEnabled = (selectedCoin != null);
             uxContextDelete.IsEnabled = (selectedCoin != null);
+            uxFileDelete.IsEnabled = (selectedCoin != null);
             uxContextFavourite.IsEnabled = (selectedCoin != null);
+            uxFileFavourite.IsEnabled = (selectedCoin != null);
         }
-
-        
-
         private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -157,29 +158,27 @@ namespace CryptoWalletApp
         #region Edit_Click
         private void uxContextEdit_Click(object sender, RoutedEventArgs e)
         {
-            var window = new CoinWindow();
-            window.Coin = selectedCoin.Clone();
-
-            if (window.ShowDialog() == true)
-            {
-                App.CoinRepository.Update(window.Coin.ToRepositoryModel());
-                LoadCoins();
-            }
-        }
-
-        private void uxList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
             if (selectedCoin != null)
             {
                 var window = new CoinWindow();
-                window.Coin = selectedCoin.Clone();
+                window.Coin = selectedCoin?.Clone();
 
                 if (window.ShowDialog() == true)
                 {
                     App.CoinRepository.Update(window.Coin.ToRepositoryModel());
                     LoadCoins();
                 }
-            }            
+            }
+        }
+
+        private void uxList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            uxContextEdit_Click(sender, null);                     
+        }
+
+        private void uxFileEdit_Click(object sender, RoutedEventArgs e)
+        {
+            uxContextEdit_Click(sender, null);
         }
 
         #endregion
@@ -187,26 +186,37 @@ namespace CryptoWalletApp
         #region Delete_Click
         private void uxContextDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (selectedCoin != null)
+            {
+                App.CoinRepository.Remove(selectedCoin.Id);
+                LoadCoins();
+            }
+        }
+        private void uxFileDelete_Click(object sender, RoutedEventArgs e)
+        {
+            uxContextDelete_Click(sender, null);
         }
 
         #endregion
 
-        #region Other_Click
-        private void uxFileExit_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
+        #region Other_Click        
 
         private void uxContextFavourite_Click(object sender, RoutedEventArgs e)
         {
             uxInfo.IsEnabled = false;
         }
 
+        private void uxFileFavourite_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void uxFileExit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
 
         #endregion
 
-        
+
     }
 }

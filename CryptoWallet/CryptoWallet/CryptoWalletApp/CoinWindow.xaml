@@ -6,50 +6,57 @@
         xmlns:local="clr-namespace:CryptoWalletApp"
         mc:Ignorable="d"
         Title="CoinWindow" Height="250" Width="300"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        FocusManager.FocusedElement="{Binding ElementName=uxName}">
      <Grid x:Name="uxGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="15"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="1"></RowDefinition>    <!--0-->
+            <RowDefinition Height="auto"></RowDefinition> <!--1-->
+            <RowDefinition Height="auto"></RowDefinition> <!--2-->
+            <RowDefinition Height="auto"></RowDefinition> <!--3-->
+            <RowDefinition Height="auto"></RowDefinition> <!--4-->
+            <RowDefinition Height="auto"></RowDefinition> <!--5-->
+            <RowDefinition Height="15"></RowDefinition>   <!--6-->
+            <RowDefinition Height="auto"></RowDefinition> <!--7-->
+            <RowDefinition Height="auto"></RowDefinition> <!--8-->
+            <RowDefinition Height="auto"></RowDefinition> <!--9-->
+            <RowDefinition Height="auto"></RowDefinition> <!--10-->
+            <RowDefinition Height="auto"></RowDefinition> <!--11-->
         </Grid.RowDefinitions>
         <!-- Row 1 -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <TextBox x:Name="uxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0 0 5 0"></TextBox>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBox x:Name="uxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0 0 5 1"></TextBox>
         <!-- Row 2 -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ticker:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" HorizontalAlignment="left">
-            <TextBox x:Name="uxTicker" Text="{Binding Ticker, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="75" HorizontalAlignment="left"></TextBox>
-            <TextBlock x:Name="uxError_Name" Text="{Binding Error_Name, UpdateSourceTrigger=PropertyChanged}" Foreground="Red"></TextBlock>
-        </StackPanel>
-         
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ticker:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBox x:Name="uxTicker" Text="{Binding Ticker, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" Width="75" HorizontalAlignment="left" Margin="0 0 0 1"></TextBox>         
         <!-- Row 3 -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Purchase Date:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <DatePicker x:Name="uxPurchaseDate" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Width="120" Grid.Row="3" Grid.Column="1" HorizontalAlignment="left"></DatePicker>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Purchase Date:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <DatePicker x:Name="uxPurchaseDate" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Width="120" Grid.Row="3" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"></DatePicker>
         <!-- Row 4 -->
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Purchase Price:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <TextBox x:Name="uxPurchasePrice" Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="4" Grid.Column="1" HorizontalAlignment="left"></TextBox>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Purchase Price:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBox x:Name="uxPurchasePrice" Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="4" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
         <!-- Row 5 -->
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Quantity:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <TextBox x:Name="uxQuantity" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="5" Grid.Column="1" HorizontalAlignment="left"></TextBox>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Quantity:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBox x:Name="uxQuantity" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="5" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
          
         <!-- Row 7 -->
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Current Price:" HorizontalAlignment="Right" Margin="0 0 5 0"></TextBlock>
-        <TextBox x:Name="uxCurrentPrice" Text="{Binding CurrentPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="7" Grid.Column="1" HorizontalAlignment="left"></TextBox>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Current Price:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBox x:Name="uxCurrentPrice" Text="{Binding CurrentPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="7" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
         <!-- Row 8 -->
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="Price Last Updated:" HorizontalAlignment="Right" Margin="5 0 5 0"></TextBlock>
-        <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding CurrentPriceDate}" HorizontalAlignment="Left" Margin="0 0 5 0"></TextBlock>
+        <TextBlock x:Name="uxCurrentPriceLastUpdated" Grid.Row="8" Grid.Column="0" Text="Price Last Updated:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+        <TextBlock x:Name="uxCurrentPriceDate" Grid.Row="8" Grid.Column="1" Text="{Binding CurrentPriceDate}" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
+
+        <!--<StackPanel Orientation="Vertical" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Text="{Binding Error_Name, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" Foreground="Red"></TextBlock>
+            <TextBlock Text="{Binding Error_Ticker, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" Foreground="Red"></TextBlock>
+            <TextBlock Text="{Binding Error_PurchasePrice, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" Foreground="Red"></TextBlock>
+            <TextBlock Text="{Binding Error_Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" Foreground="Red"></TextBlock>
+            <TextBlock Text="{Binding Error_CurrentPrice, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" Foreground="Red"></TextBlock>
+        </StackPanel>-->        
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right">
             <Button x:Name="uxSubmit"  MinWidth="10" HorizontalAlignment="Center" Margin="10" Click="uxSubmit_Click">Submit</Button>

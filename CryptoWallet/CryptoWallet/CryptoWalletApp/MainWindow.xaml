@@ -32,12 +32,29 @@
     </Window.ContextMenu>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem x:Name="uxFileNew" Header="_File" Click="uxFileNew_Click">
-                <MenuItem Header="_New">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="uxFileNew" Header="_New" Click="uxFileNew_Click">
                     <MenuItem.Icon>
                         <Image Source="/Images/file-regular.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <Separator />
+                <MenuItem x:Name="uxFileEdit" Header="_Edit" Click="uxFileEdit_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/edit-regular.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxFileDelete_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/trash-alt-regular.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="uxFileFavourite" Header="_Favourite" Click="uxFileFavourite_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/star-solid.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
                 <MenuItem x:Name="uxExit" Header="_Exit" Click="uxFileExit_Click">
                     <MenuItem.Icon>
                         <Image Source="/Images/sign-out-alt-solid.png" />
