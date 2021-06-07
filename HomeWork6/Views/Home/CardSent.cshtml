@@ -1,0 +1,41 @@
+﻿@model HomeWork6.Models.BirthdayCard
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Birthday Card Generator</title>
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 pl-4">
+            <h4 class="bg-dark text-light">Birthday Card Generator</h4>
+
+            <h2>Birthday Card Sent</h2>
+
+            <div class="form-group">
+                <label asp-for="From" class="control-label font-weight-bold pr-1">From:</label>
+                <label asp-for="From" class="control-label">@Model.From</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="To" class="control-label font-weight-bold pr-1">To:</label>
+                <label asp-for="From" class="control-label">@Model.To</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label font-weight-bold pr-1">Message:</label>
+                <label asp-for="From" class="control-label">@Model.Message</label>
+            </div>
+            <div>
+                <a asp-action="Index">Send another Card</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
