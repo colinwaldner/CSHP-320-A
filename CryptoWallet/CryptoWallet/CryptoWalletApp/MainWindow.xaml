@@ -17,15 +17,12 @@
                     <Image Source="/Images/edit-regular.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="uxContextDelete" Header="_Delete" Click="uxContextDelete_Click" IsEnabled="False">
+            <MenuItem x:Name="uxContextDelete"
+                      Header="_Delete"
+                      Click="uxContextDelete_Click"
+                      IsEnabled="False">
                 <MenuItem.Icon>
                     <Image Source="/Images/trash-alt-regular.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator />
-            <MenuItem x:Name="uxContextFavourite" Header="_Favourite" Click="uxContextFavourite_Click" IsEnabled="False">
-                <MenuItem.Icon>
-                    <Image Source="/Images/star-solid.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -44,14 +41,12 @@
                         <Image Source="/Images/edit-regular.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxFileDelete_Click" IsEnabled="False">
+                <MenuItem x:Name="uxFileDelete"
+                          Header="_Delete"
+                          Click="uxFileDelete_Click"
+                          IsEnabled="False">
                     <MenuItem.Icon>
                         <Image Source="/Images/trash-alt-regular.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem x:Name="uxFileFavourite" Header="_Favourite" Click="uxFileFavourite_Click" IsEnabled="False">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/star-solid.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />

@@ -82,8 +82,8 @@ namespace CryptoWalletApp
                 .ToList();            
 
             //Status Bar Totals
-            var sumPurchasePrice = coins.Sum(coin => coin.PurchasePrice);
-            var sumCurrentPrice = coins.Sum(coin => coin.CurrentPrice);
+            var sumPurchasePrice = coins.Sum(coin => coin.PurchasePrice * coin.Quantity);
+            var sumCurrentPrice = coins.Sum(coin => coin.CurrentPrice * coin.Quantity);
 
             uxTotalCount.Text = coins.Count.ToString();
             uxPurchaseValue.Text = String.Format("{0:C}", sumPurchasePrice);
@@ -108,8 +108,6 @@ namespace CryptoWalletApp
             uxFileEdit.IsEnabled = (selectedCoin != null);
             uxContextDelete.IsEnabled = (selectedCoin != null);
             uxFileDelete.IsEnabled = (selectedCoin != null);
-            uxContextFavourite.IsEnabled = (selectedCoin != null);
-            uxFileFavourite.IsEnabled = (selectedCoin != null);
         }
         private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
@@ -201,15 +199,6 @@ namespace CryptoWalletApp
 
         #region Other_Click        
 
-        private void uxContextFavourite_Click(object sender, RoutedEventArgs e)
-        {
-            uxInfo.IsEnabled = false;
-        }
-
-        private void uxFileFavourite_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void uxFileExit_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);

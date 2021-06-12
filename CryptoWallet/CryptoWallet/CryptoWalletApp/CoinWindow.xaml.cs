@@ -57,15 +57,20 @@ namespace CryptoWalletApp
             Close();
         }
 
-        private void NumbersOnly_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void ValidateModel(object sender, KeyEventArgs e)
         {
-            //int key = (int)e.Key;
-            //char ch = (char)e.Key;
-
-            //e.Handled = !(key >= 34 && key <= 43 ||
-            //              key >= 74 && key <= 83 ||
-            //              key == 2);
-
+            
+            if (string.IsNullOrEmpty(Coin.Error_Name) &&
+                string.IsNullOrEmpty(Coin.Error_Ticker) &&
+                string.IsNullOrEmpty(Coin.Error_PurchasePrice) &&
+                string.IsNullOrEmpty(Coin.Error_Quantity))
+            {
+                uxSubmit.IsEnabled = true;
+            }
+            else
+            {
+                uxSubmit.IsEnabled = false;
+            }
         }
     }
 }

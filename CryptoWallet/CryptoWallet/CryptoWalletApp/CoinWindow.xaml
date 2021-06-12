@@ -29,23 +29,28 @@
         </Grid.RowDefinitions>
         <!-- Row 1 -->
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <TextBox x:Name="uxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0 0 5 1"></TextBox>
+        <TextBox x:Name="uxName" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0 0 5 1"
+                 KeyUp="ValidateModel"></TextBox>
         <!-- Row 2 -->
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Ticker:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <TextBox x:Name="uxTicker" Text="{Binding Ticker, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" Width="75" HorizontalAlignment="left" Margin="0 0 0 1"></TextBox>         
+        <TextBox x:Name="uxTicker" Text="{Binding Ticker, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" Width="75" HorizontalAlignment="left" Margin="0 0 0 1" 
+                 KeyUp="ValidateModel"></TextBox>         
         <!-- Row 3 -->
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Purchase Date:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <DatePicker x:Name="uxPurchaseDate" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Width="120" Grid.Row="3" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"></DatePicker>
+        <DatePicker x:Name="uxPurchaseDate" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" Width="120" Grid.Row="3" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"
+                    KeyUp="ValidateModel"></DatePicker>
         <!-- Row 4 -->
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Purchase Price:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <TextBox x:Name="uxPurchasePrice" Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="4" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
+        <TextBox x:Name="uxPurchasePrice" Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="4" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"
+                 KeyUp="ValidateModel"></TextBox>
         <!-- Row 5 -->
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Quantity:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <TextBox x:Name="uxQuantity" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="5" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
+        <TextBox x:Name="uxQuantity" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="5" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"
+                 KeyUp="ValidateModel"></TextBox>
          
         <!-- Row 7 -->
         <TextBlock Grid.Row="7" Grid.Column="0" Text="Current Price:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
-        <TextBox x:Name="uxCurrentPrice" Text="{Binding CurrentPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" Grid.Row="7" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1" PreviewKeyDown="NumbersOnly_PreviewKeyDown"></TextBox>
+        <TextBox x:Name="uxCurrentPrice" Text="{Binding CurrentPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False}" Width="100" Grid.Row="7" Grid.Column="1" HorizontalAlignment="left" Margin="0 0 0 1"></TextBox>
         <!-- Row 8 -->
         <TextBlock x:Name="uxCurrentPriceLastUpdated" Grid.Row="8" Grid.Column="0" Text="Price Last Updated:" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
         <TextBlock x:Name="uxCurrentPriceDate" Grid.Row="8" Grid.Column="1" Text="{Binding CurrentPriceDate}" HorizontalAlignment="Left" Margin="5 0 5 1"></TextBlock>
@@ -59,7 +64,7 @@
         </StackPanel>-->        
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right">
-            <Button x:Name="uxSubmit"  MinWidth="10" HorizontalAlignment="Center" Margin="10" Click="uxSubmit_Click">Submit</Button>
+            <Button x:Name="uxSubmit"  MinWidth="10" HorizontalAlignment="Center" Margin="10" Click="uxSubmit_Click" IsEnabled="False">Submit</Button>
             <Button x:Name="uxCancel"  MinWidth="10" HorizontalAlignment="Center" Margin="10" Click="uxCancel_Click">Cancel</Button>                      
         </StackPanel>
     </Grid>

@@ -105,7 +105,7 @@ namespace CryptoWalletApp.Model
         {
             get
             {
-                return CurrentPrice - PurchasePrice;
+                return (CurrentPrice - PurchasePrice) * Quantity;
             }
         }
         #endregion
